@@ -37,6 +37,7 @@ const SocialIcon = styled.div`
   align-items: center;
   justify-content: center;
   margin-right: 20px;
+  cursor: pointer;
 `;
 
 // Center part of the footer
@@ -57,6 +58,7 @@ const List = styled.ul`
 const ListItem = styled.li`
   width: 50%;
   margin-bottom: 10px;
+  cursor: pointer;
 `;
 
 // Right side of the footer
@@ -69,9 +71,11 @@ const ContactItem = styled.div`
   margin-bottom: 20px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 const Payment = styled.img`
   width: 50%;
+  cursror: pointer;
 `;
 
 const Footer = () => {
