@@ -119,9 +119,9 @@ const ProductSingle = () => {
             </FilterContainer>
             <AddContainer>
               <AmmountContainer>
-                <Remove />
+                <Remove style={{ cursor: "pointer" }} />
                 <Ammount>1</Ammount>
-                <Add />
+                <Add style={{ cursor: "pointer" }} />
               </AmmountContainer>
               <Button>ADD TO CART</Button>
             </AddContainer>
