@@ -44,7 +44,7 @@ export const Newsletter = () => {
       <Container>
         <Title>Newsletter</Title>
         <Description>
-          Get timely updates about your favourite beers.
+          Get timely updates about your favourite beverages.
         </Description>
         <InputContainer>
           <Input placeholder="Your Email" />
