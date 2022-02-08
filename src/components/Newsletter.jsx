@@ -38,7 +38,7 @@ const Button = styled.button`
   color: white;
 `;
 
-export const Newsletter = () => {
+const Newsletter = () => {
   return (
     <>
       <Container>
@@ -56,3 +56,5 @@ export const Newsletter = () => {
     </>
   );
 };
+
+export default Newsletter;
