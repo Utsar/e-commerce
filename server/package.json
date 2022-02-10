@@ -1,0 +1,24 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "dev": "nodemon -e js -r dotenv/config server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2",
+    "express-list-endpoints": "^6.0.0",
+    "http-errors": "^2.0.0",
+    "mongoose": "^6.2.1",
+    "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
