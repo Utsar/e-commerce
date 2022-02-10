@@ -1,17 +1,29 @@
 import express from "express";
 import listEndpoints from "express-list-endpoints";
 import mongoose from "mongoose";
-import userRouter from "./routes/users/user.js";
+import {
+  badRequestErrorHandler,
+  notFoundErrorHandler,
+  catchAllErrorHandler,
+} from "./routes/errorHandlers.js";
 
 const server = express();
 const PORT = process.env.PORT || 3001;
 const MONGODB_CONNECTION = process.env.MONGODB_CONNECTION;
 
+// ****************** MIDDLEWARES ******************
 server.use(express.json());
+
+// ****************** ROUTES ******************
+
+// ****************** ERROR HANDLERS ******************
+server.use(badRequestErrorHandler);
+server.use(notFoundErrorHandler);
+server.use(catchAllErrorHandler);
 
 console.table(listEndpoints(server));
 
-// initialize mongoose
+// ********** INITIALISING MONGOOSE CONNECTION ******************
 mongoose
   .connect(MONGODB_CONNECTION, {
     useNewUrlParser: true,
@@ -25,7 +37,3 @@ server.listen(PORT || 3001, () =>
 );
 
 //testing
-server.get("/api/test", () => {
-  console.log("test is successul");
-});
-server.use("/api/user", userRouter);
