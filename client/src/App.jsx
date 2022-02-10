@@ -1,7 +1,7 @@
 import "./App.css";
-import Cart from "./pages/Cart";
+// import Cart from "./pages/Cart";
 // import Login from "./pages/Login";
-// import Home from "./pages/Home";
+import Home from "./pages/Home";
 // import ProductList from "./pages/ProductList";
 // import ProductSingle from "./pages/ProductSingle";
 // import Register from "./pages/Register";
@@ -9,12 +9,12 @@ import Cart from "./pages/Cart";
 function App() {
   return (
     <>
-      {/* <Home /> */}
+      <Home />
       {/* <ProductList /> */}
       {/* <ProductSingle /> */}
       {/* <Register /> */}
       {/* <Login /> */}
-      <Cart />
+      {/* <Cart /> */}
     </>
   );
 }
