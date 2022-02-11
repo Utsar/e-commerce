@@ -7,6 +7,7 @@ import {
   notFoundErrorHandler,
   catchAllErrorHandler,
 } from "./routes/errorHandlers.js";
+import userRouter from "./routes/users/user.js";
 
 const server = express();
 const PORT = process.env.PORT || 3001;
@@ -17,6 +18,7 @@ server.use(express.json());
 
 // ****************** ROUTES ******************
 server.use("/api/auth", authRouter);
+server.use("/api/users", userRouter);
 
 // ****************** ERROR HANDLERS ******************
 server.use(badRequestErrorHandler);
