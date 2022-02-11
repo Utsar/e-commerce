@@ -1,11 +1,13 @@
 import express from "express";
 import listEndpoints from "express-list-endpoints";
 import mongoose from "mongoose";
+import authRouter from "./routes/auth/auth.js";
 import {
   badRequestErrorHandler,
   notFoundErrorHandler,
   catchAllErrorHandler,
 } from "./routes/errorHandlers.js";
+import userRouter from "./routes/users/user.js";
 
 const server = express();
 const PORT = process.env.PORT || 3001;
@@ -15,6 +17,8 @@ const MONGODB_CONNECTION = process.env.MONGODB_CONNECTION;
 server.use(express.json());
 
 // ****************** ROUTES ******************
+server.use("/api/auth", authRouter);
+server.use("/api/users", userRouter);
 
 // ****************** ERROR HANDLERS ******************
 server.use(badRequestErrorHandler);
