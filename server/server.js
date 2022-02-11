@@ -1,6 +1,7 @@
 import express from "express";
 import listEndpoints from "express-list-endpoints";
 import mongoose from "mongoose";
+import authRouter from "./routes/auth/auth.js";
 import {
   badRequestErrorHandler,
   notFoundErrorHandler,
@@ -15,6 +16,7 @@ const MONGODB_CONNECTION = process.env.MONGODB_CONNECTION;
 server.use(express.json());
 
 // ****************** ROUTES ******************
+server.use("/api/auth", authRouter);
 
 // ****************** ERROR HANDLERS ******************
 server.use(badRequestErrorHandler);
