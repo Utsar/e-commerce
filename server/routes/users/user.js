@@ -20,7 +20,42 @@ userRouter.put("/:id", verifyAndAuth, async (req, res) => {
       { new: true }
     );
     res.status(200).send(updatedUser);
-  } catch {
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+// deleting user
+
+userRouter.put("/:id", verifyAndAuth, async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    res.status(200).send({ message: "User deleted" });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+// get single user
+
+userRouter.get("/find/:id", verifyAndAdmin, async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    res.status(200).send(user);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+// get all users
+userRouter.get("/", verifyAndAdmin, async (req, res) => {
+  const query = req.query.new;
+  try {
+    const users = query
+      ? await User.find().sort({ _id: -1 }).limit(5)
+      : await User.find();
+    res.status(200).send(users);
+  } catch (error) {
     res.status(500).send(error);
   }
 });
