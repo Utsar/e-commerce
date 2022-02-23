@@ -8,6 +8,7 @@ import {
   catchAllErrorHandler,
 } from "./routes/errorHandlers.js";
 import userRouter from "./routes/users/user.js";
+import productRouter from "./routes/product/product.js";
 
 const server = express();
 const PORT = process.env.PORT || 3001;
@@ -19,6 +20,7 @@ server.use(express.json());
 // ****************** ROUTES ******************
 server.use("/api/auth", authRouter);
 server.use("/api/users", userRouter);
+server.use("/api/products", productRouter);
 
 // ****************** ERROR HANDLERS ******************
 server.use(badRequestErrorHandler);

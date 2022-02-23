@@ -1,6 +1,6 @@
 import express from "express";
-import Product from "./productSchema";
-import { verifyToken, verifyAndAdmin, verifyAndAuth } from "../verifyToken";
+import Product from "./productSchema.js";
+import { verifyToken, verifyAndAdmin, verifyAndAuth } from "../verifyToken.js";
 
 const productRouter = express.Router();
 
