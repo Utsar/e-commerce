@@ -8,6 +8,8 @@ import {
   catchAllErrorHandler,
 } from "./routes/errorHandlers.js";
 import userRouter from "./routes/users/user.js";
+import productRouter from "./routes/product/product.js";
+import cartRouter from "./routes/cart/cart.js";
 
 const server = express();
 const PORT = process.env.PORT || 3001;
@@ -19,6 +21,8 @@ server.use(express.json());
 // ****************** ROUTES ******************
 server.use("/api/auth", authRouter);
 server.use("/api/users", userRouter);
+server.use("/api/products", productRouter);
+server.use("/api/cart", cartRouter);
 
 // ****************** ERROR HANDLERS ******************
 server.use(badRequestErrorHandler);
