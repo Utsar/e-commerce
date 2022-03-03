@@ -1,15 +1,16 @@
 import express from "express";
 import listEndpoints from "express-list-endpoints";
 import mongoose from "mongoose";
-import authRouter from "./routes/auth/auth.js";
 import {
   badRequestErrorHandler,
   notFoundErrorHandler,
   catchAllErrorHandler,
 } from "./routes/errorHandlers.js";
+import authRouter from "./routes/auth/auth.js";
 import userRouter from "./routes/users/user.js";
 import productRouter from "./routes/product/product.js";
 import cartRouter from "./routes/cart/cart.js";
+import orderRouter from "./routes/order/order.js";
 
 const server = express();
 const PORT = process.env.PORT || 3001;
@@ -23,6 +24,7 @@ server.use("/api/auth", authRouter);
 server.use("/api/users", userRouter);
 server.use("/api/products", productRouter);
 server.use("/api/cart", cartRouter);
+server.use("api/orders", orderRouter);
 
 // ****************** ERROR HANDLERS ******************
 server.use(badRequestErrorHandler);
