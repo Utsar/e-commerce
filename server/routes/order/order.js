@@ -1,6 +1,6 @@
 import express from "express";
 import Order from "./orderSchema.js";
-import { verifyAndAdmin, verifyToken } from "../verifyToken.js";
+import { verifyAndAdmin, verifyAndAuth, verifyToken } from "../verifyToken.js";
 
 const orderRouter = express.Router();
 
@@ -37,7 +37,7 @@ orderRouter.put("/:id", verifyAndAdmin, async (req, res, next) => {
   }
 });
 // GET USER ORDERS
-orderRouter.get("/find/:userId", verifyAndAdmin, async (req, res, next) => {
+orderRouter.get("/find/:userId", verifyAndAuth, async (req, res, next) => {
   try {
     const orders = await Order.find({ userId: req.params.id });
     res.status(200).send(orders);

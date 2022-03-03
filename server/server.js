@@ -24,7 +24,7 @@ server.use("/api/auth", authRouter);
 server.use("/api/users", userRouter);
 server.use("/api/products", productRouter);
 server.use("/api/cart", cartRouter);
-server.use("api/orders", orderRouter);
+server.use("/api/orders", orderRouter);
 
 // ****************** ERROR HANDLERS ******************
 server.use(badRequestErrorHandler);

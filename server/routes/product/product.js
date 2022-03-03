@@ -1,12 +1,12 @@
 import express from "express";
 import Product from "./productSchema.js";
-import { verifyAndAdmin } from "../verifyToken.js";
+import { verifyAndAdmin, verifyToken, verifyAndAuth } from "../verifyToken.js";
 
 const productRouter = express.Router();
 
 // Create
 
-productRouter.post("/", verifyAndAdmin, async (req, res) => {
+productRouter.post("/", verifyToken, async (req, res) => {
   const newProduct = new Product(req.bodd);
   try {
     const savedProduct = await newProduct.save();
