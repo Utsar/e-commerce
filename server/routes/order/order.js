@@ -5,7 +5,7 @@ import { verifyAndAdmin, verifyAndAuth, verifyToken } from "../verifyToken.js";
 const orderRouter = express.Router();
 
 // CREATE AN ORDER
-orderRouter.post("/", verifyToken, async (req, res, next) => {
+orderRouter.post("/", verifyToken, async (req, res) => {
   const newOrder = new Order(req.body);
   try {
     const savedOrder = await newOrder.save();
@@ -56,7 +56,7 @@ orderRouter.get("/", verifyAndAdmin, async (req, res, next) => {
 });
 // GET STATS
 
-orderRouter.get("/imcome", verifyAndAdmin, async (req, res) => {
+orderRouter.get("/income", verifyAndAdmin, async (req, res) => {
   const date = new Date();
   const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
   const previousMonth = new Date(new Date().setMonth(lastMonth() - 1));
