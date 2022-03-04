@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { popularProducts } from "../data";
 import Product from "./Product";
@@ -9,7 +10,9 @@ const Container = styled.div`
   justify-content: space-between;
 `;
 
-const Products = () => {
+const Products = ({ category, filter, sort }) => {
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   return (
     <>
       <Container>

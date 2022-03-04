@@ -34,18 +34,21 @@ export const categories = [
     image:
       "https://images.pexels.com/photos/1267700/pexels-photo-1267700.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
     title: "ASSORTED CRAFT!",
+    category: "gifts",
   },
   {
     id: 2,
     image:
       "https://images.pexels.com/photos/1089932/pexels-photo-1089932.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
     title: "BOTTLED UP!",
+    category: "beers",
   },
   {
     id: 3,
     image:
       "https://images.pexels.com/photos/1283219/pexels-photo-1283219.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
     title: "SPIRITUAL!",
+    category: "spirits",
   },
 ];
 
