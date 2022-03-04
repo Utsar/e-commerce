@@ -1,6 +1,7 @@
 import express from "express";
 import listEndpoints from "express-list-endpoints";
 import mongoose from "mongoose";
+import cors from "cors";
 import {
   badRequestErrorHandler,
   notFoundErrorHandler,
@@ -11,6 +12,7 @@ import userRouter from "./routes/users/user.js";
 import productRouter from "./routes/product/product.js";
 import cartRouter from "./routes/cart/cart.js";
 import orderRouter from "./routes/order/order.js";
+import stripeRouter from "./routes/stripe/stripe.js";
 
 const server = express();
 const PORT = process.env.PORT || 3001;
@@ -18,13 +20,15 @@ const MONGODB_CONNECTION = process.env.MONGODB_CONNECTION;
 
 // ****************** MIDDLEWARES ******************
 server.use(express.json());
+server.use(cors());
 
 // ****************** ROUTES ******************
 server.use("/api/auth", authRouter);
 server.use("/api/users", userRouter);
 server.use("/api/products", productRouter);
 server.use("/api/cart", cartRouter);
-server.use("api/orders", orderRouter);
+server.use("/api/orders", orderRouter);
+server.use("/api/checkout", stripeRouter);
 
 // ****************** ERROR HANDLERS ******************
 server.use(badRequestErrorHandler);

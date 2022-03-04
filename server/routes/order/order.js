@@ -1,11 +1,11 @@
 import express from "express";
 import Order from "./orderSchema.js";
-import { verifyAndAdmin, verifyToken } from "../verifyToken.js";
+import { verifyAndAdmin, verifyAndAuth, verifyToken } from "../verifyToken.js";
 
 const orderRouter = express.Router();
 
 // CREATE AN ORDER
-orderRouter.post("/", verifyToken, async (req, res, next) => {
+orderRouter.post("/", verifyToken, async (req, res) => {
   const newOrder = new Order(req.body);
   try {
     const savedOrder = await newOrder.save();
@@ -37,7 +37,7 @@ orderRouter.put("/:id", verifyAndAdmin, async (req, res, next) => {
   }
 });
 // GET USER ORDERS
-orderRouter.get("/find/:userId", verifyAndAdmin, async (req, res, next) => {
+orderRouter.get("/find/:userId", verifyAndAuth, async (req, res, next) => {
   try {
     const orders = await Order.find({ userId: req.params.id });
     res.status(200).send(orders);
@@ -56,7 +56,7 @@ orderRouter.get("/", verifyAndAdmin, async (req, res, next) => {
 });
 // GET STATS
 
-orderRouter.get("/imcome", verifyAndAdmin, async (req, res) => {
+orderRouter.get("/income", verifyAndAdmin, async (req, res) => {
   const date = new Date();
   const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
   const previousMonth = new Date(new Date().setMonth(lastMonth() - 1));
