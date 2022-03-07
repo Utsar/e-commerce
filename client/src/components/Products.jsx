@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import { popularProducts } from "../data";
+// import { popularProducts } from "../data";
 import Product from "./Product";
 
 const Container = styled.div`
@@ -15,6 +15,7 @@ const Products = ({ category, filter, sort }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
+  // fetch products categories from API
   useEffect(() => {
     const getProducts = async () => {
       try {
@@ -23,18 +24,52 @@ const Products = ({ category, filter, sort }) => {
             ? `http://localhost:3001/api/products?category=${category}`
             : "http://localhost:3001/api/products"
         );
-        // console.log(response);
         setProducts(response.data);
       } catch (error) {}
     };
     getProducts();
   }, [category]);
+
+  // filter products
+  useEffect(() => {
+    category &&
+      setFilteredProducts(
+        products.filter((item) =>
+          Object.entries(filter).every(([key, value]) =>
+            item[key].includes(value)
+          )
+        )
+      );
+  }, [products, category, filter]);
+
+  // sort products
+
+  useEffect(() => {
+    if (sort === "newest") {
+      setFilteredProducts((prev) =>
+        [...prev].sort((a, b) => a.createdAt - b.createdAt)
+      );
+    } else if (sort === "asc") {
+      setFilteredProducts((prev) =>
+        [...prev].sort((a, b) => a.price - b.price)
+      );
+    } else {
+      setFilteredProducts((prev) =>
+        [...prev].sort((a, b) => b.price - a.price)
+      );
+    }
+  }, [sort]);
+
   return (
     <>
       <Container>
-        {popularProducts.map((item) => (
-          <Product key={item.id} item={item} />
-        ))}
+        {category
+          ? filteredProducts.map((item) => (
+              <Product key={item.id} item={item} />
+            ))
+          : products
+              .slice(0, 8)
+              .map((item) => <Product key={item.id} item={item} />)}
       </Container>
     </>
   );
