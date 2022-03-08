@@ -5,6 +5,9 @@ import Footer from "../components/Footer";
 import Newsletter from "../components/Newsletter";
 import { Add, Remove } from "@material-ui/icons";
 import { mobile } from "../responsive";
+import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { publicRequest } from "../backend";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -92,6 +95,20 @@ const Button = styled.button`
 `;
 
 const ProductSingle = () => {
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
+
+  const [product, setProduct] = useState({});
+
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res = await publicRequest.get("/products/find/" + id);
+        setProduct(res.data);
+      } catch (error) {}
+    };
+    getProduct();
+  }, [id]);
   return (
     <>
       <Container>
@@ -99,26 +116,19 @@ const ProductSingle = () => {
         <Navbar />
         <Wrapper>
           <ImageContainer>
-            <Image src="https://www.youdreamitaly.com/software/immagini/0000000019745_medium.jpg" />
+            <Image src={product.image} />
           </ImageContainer>
           <InfoContainer>
-            <Title>Ichnusa</Title>
-            <Description>
-              A beer that contains the notes of Sardinia: light barley malt and
-              caramel barley malt that create a blend that gives the unfiltered
-              beer a round taste with notes of yellow fruit, apricot and bread
-              crust.
-            </Description>
-            <Price>£6</Price>
+            <Title>{product.title}</Title>
+            <Description>{product.description}</Description>
+            <Price>£{product.price}</Price>
             <FilterContainer>
               <Filter>
                 <FilterTitle>Size</FilterTitle>
                 <FilterSize>
-                  <FilterSizeOption>0.33cl</FilterSizeOption>
-                  <FilterSizeOption>0.5cl</FilterSizeOption>
-                  <FilterSizeOption>Six Pack</FilterSizeOption>
-                  <FilterSizeOption>Case: 12</FilterSizeOption>
-                  <FilterSizeOption>Case: 24</FilterSizeOption>
+                  {product.size?.map((s) => (
+                    <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                  ))}
                 </FilterSize>
               </Filter>
             </FilterContainer>
