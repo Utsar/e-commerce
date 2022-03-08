@@ -23,7 +23,7 @@ function App() {
           <Route path="/products" element={<ProductList />}>
             <Route path="/products/:categories" element={<ProductList />} />
           </Route>
-          <Route path="/products/:id" element={<ProductSingle />} />
+          <Route path="/product/:id" element={<ProductSingle />} />
           <Route
             path="/register"
             element={user ? <Navigate replace to="/" /> : <Register />}
