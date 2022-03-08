@@ -126,11 +126,9 @@ const ProductSingle = () => {
               <Filter>
                 <FilterTitle>Size</FilterTitle>
                 <FilterSize>
-                  <FilterSizeOption>0.33cl</FilterSizeOption>
-                  <FilterSizeOption>0.5cl</FilterSizeOption>
-                  <FilterSizeOption>Six Pack</FilterSizeOption>
-                  <FilterSizeOption>Case: 12</FilterSizeOption>
-                  <FilterSizeOption>Case: 24</FilterSizeOption>
+                  {product.size?.map((s) => (
+                    <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                  ))}
                 </FilterSize>
               </Filter>
             </FilterContainer>
