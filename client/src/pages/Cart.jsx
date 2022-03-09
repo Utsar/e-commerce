@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Add, Remove } from "@material-ui/icons";
 import { mobile } from "../responsive";
+import { useSelector } from "react-redux";
 
 // top
 const Container = styled.div``;
@@ -129,6 +130,7 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
+  const cart = useSelector((state) => state.cart);
   return (
     <>
       <Container>
@@ -146,61 +148,44 @@ const Cart = () => {
           </Top>
           <Bottom>
             <Info>
-              <Product>
-                <ProductDetail>
-                  <Image src="https://www.birraperoni.it/wp-content/uploads/2021/06/Peroni-33-Cruda.png" />
-                  <Details>
-                    <ProductName>
-                      <b>Product: </b>Peroni Cruda
-                    </ProductName>
-                    <ProductId>
-                      <b>ID: </b>123456
-                    </ProductId>
-                    <ProductSize>
-                      <b>Size: </b>0.33cl
-                    </ProductSize>
-                  </Details>
-                </ProductDetail>
-                <PriceDetail>
-                  <ProductAmmountContainer>
-                    <Add />
-                    <ProductAmmount>1</ProductAmmount>
-                    <Remove />
-                  </ProductAmmountContainer>
-                  <ProductPrice>£ 5</ProductPrice>
-                </PriceDetail>
-              </Product>
+              {cart.products.map((product) => (
+                <Product>
+                  <ProductDetail>
+                    <Image src={product.image} />
+                    <Details>
+                      <ProductName>
+                        <b>Product: </b>
+                        {product.title}
+                      </ProductName>
+                      <ProductId>
+                        <b>ID: </b>
+                        {product._id}
+                      </ProductId>
+                      <ProductSize>
+                        <b>Size: </b>
+                        {product.size}
+                      </ProductSize>
+                    </Details>
+                  </ProductDetail>
+                  <PriceDetail>
+                    <ProductAmmountContainer>
+                      <Add />
+                      <ProductAmmount>{product.quantity}</ProductAmmount>
+                      <Remove />
+                    </ProductAmmountContainer>
+                    <ProductPrice>
+                      £{product.price * product.quantity}
+                    </ProductPrice>
+                  </PriceDetail>
+                </Product>
+              ))}
               <Hr />
-              <Product>
-                <ProductDetail>
-                  <Image src="https://www.birraperoni.it/wp-content/uploads/2021/06/Peroni-33-Cruda.png" />
-                  <Details>
-                    <ProductName>
-                      <b>Product: </b>Peroni Cruda
-                    </ProductName>
-                    <ProductId>
-                      <b>ID: </b>123456
-                    </ProductId>
-                    <ProductSize>
-                      <b>Size: </b>0.33cl
-                    </ProductSize>
-                  </Details>
-                </ProductDetail>
-                <PriceDetail>
-                  <ProductAmmountContainer>
-                    <Remove />
-                    <ProductAmmount>1</ProductAmmount>
-                    <Add />
-                  </ProductAmmountContainer>
-                  <ProductPrice>£ 5</ProductPrice>
-                </PriceDetail>
-              </Product>
             </Info>
             <Summary>
               <SummaryTitle>ORDER SUMMARY</SummaryTitle>
               <SummaryItem>
                 <SummaryItemText>Subtotal:</SummaryItemText>
-                <SummaryItemTotal>£ 25</SummaryItemTotal>
+                <SummaryItemTotal>£ {cart.total}</SummaryItemTotal>
               </SummaryItem>
               <SummaryItem>
                 <SummaryItemText>Estimated Shipping:</SummaryItemText>
@@ -212,7 +197,7 @@ const Cart = () => {
               </SummaryItem>
               <SummaryItem type="total">
                 <SummaryItemText>Total:</SummaryItemText>
-                <SummaryItemTotal>£ 30</SummaryItemTotal>
+                <SummaryItemTotal>£ {cart.total}</SummaryItemTotal>
               </SummaryItem>
               <Button>CHECK-OUT</Button>
             </Summary>
