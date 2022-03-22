@@ -50,7 +50,7 @@ authRouter.post("/login", async (req, res, next) => {
       { expiresIn: "1h" }
     );
     res.status(200).send({ user, token });
-  } catch {
+  } catch (error) {
     next(error);
   }
 });

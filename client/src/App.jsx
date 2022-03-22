@@ -12,9 +12,12 @@ import ProductList from "./pages/ProductList";
 import ProductSingle from "./pages/ProductSingle";
 import Register from "./pages/Register";
 import Success from "./pages/Success";
+import { useSelector } from "react-redux";
 
 function App() {
-  const user = true;
+  // const user = false;
+
+  const user = useSelector((state) => state.user.currentUser);
 
   return (
     <>
