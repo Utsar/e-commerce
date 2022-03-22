@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import ProductList from "./pages/ProductList";
 import ProductSingle from "./pages/ProductSingle";
 import Register from "./pages/Register";
+import Success from "./pages/Success";
 
 function App() {
   const user = true;
@@ -33,6 +34,7 @@ function App() {
             element={user ? <Navigate replace to="/" /> : <Login />}
           />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/success" element={<Success />} />
         </Routes>
       </Router>
     </>
