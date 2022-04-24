@@ -13,10 +13,14 @@ import productRouter from "./routes/product/product.js";
 import cartRouter from "./routes/cart/cart.js";
 import orderRouter from "./routes/order/order.js";
 import stripeRouter from "./routes/stripe/stripe.js";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
 
 const server = express();
 const PORT = process.env.PORT || 3001;
 const MONGODB_CONNECTION = process.env.MONGODB_CONNECTION;
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // ****************** MIDDLEWARES ******************
 server.use(express.json());
@@ -29,6 +33,11 @@ server.use("/api/products", productRouter);
 server.use("/api/cart", cartRouter);
 server.use("/api/orders", orderRouter);
 server.use("/api/checkout", stripeRouter);
+
+server.use(express.static(path.join(__dirname, "/client/build")));
+server.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/client/build", "index.html"));
+});
 
 // ****************** ERROR HANDLERS ******************
 server.use(badRequestErrorHandler);
