@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js",
+    "start": "node -e js server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build",
     "dev": "nodemon -e js -r dotenv/config server.js"
   },
   "author": "",
@@ -18,7 +19,8 @@
     "express-list-endpoints": "^6.0.0",
     "http-errors": "^2.0.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.2.1"
+    "mongoose": "^6.2.1",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
